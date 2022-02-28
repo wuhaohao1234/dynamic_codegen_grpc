@@ -32,24 +32,14 @@ var packageDefinition = protoLoader.loadSync(
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 
 function main() {
-  var argv = parseArgs(process.argv.slice(2), {
-    string: 'target'
-  });
-  var target;
-  if (argv.target) {
-    target = argv.target;
-  } else {
-    target = 'localhost:50051';
-  }
-  var client = new hello_proto.Greeter(target,
+  
+  var client = new hello_proto.Greeter('localhost:50051',
                                        grpc.credentials.createInsecure());
-  var user;
-  if (argv._.length > 0) {
-    user = argv._[0]; 
-  } else {
-    user = 'world';
-  }
-  client.sayHello({name: user}, function(err, response) {
+
+  client.sayHello({name: 'you'}, function(err, response) {
+    console.log('Greeting:', response.message);
+  });
+  client.sayHelloAgain({name: 'me'}, function(err, response) {
     console.log('Greeting:', response.message);
   });
 }
