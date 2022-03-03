@@ -1,5 +1,13 @@
 # grpc-node
 
+## tdd
+
+```shell
+npm install
+npm run server
+npm run tst
+```
+
 ## quick start
 
 ```shell
